@@ -1,0 +1,47 @@
+### <-- Un-Comment the following lines to enable the GitHub Actions workflow for scheduled TFE runs -->
+
+#name: Scheduled TFE Run
+#
+#on:
+#  workflow_dispatch:       # Manual trigger via GitHub UI
+#  schedule:                # Optional: scheduled run at 3:00 AM UTC daily
+#    - cron: '0 3 * * *'
+#
+#jobs:
+#  trigger-tfe:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout repo
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: '3.x'
+#
+#      - name: Install dependencies
+#        run: pip install pyterprise
+#
+#      - name: Trigger TFE run
+#        run: |
+#          TFE_URL="${{ secrets.TFE_URL }}"
+#          TFE_TOKEN="${{ secrets.TFE_TOKEN }}"
+#          ORG_ID="<<org_name>>"
+#          WORKSPACE_NAME="<<workspace_name"
+#
+#          python -c "
+#import pyterprise
+#
+#print('Invoking scheduled TFE run.')
+#client = pyterprise.Client()
+#client.init(token='${TFE_TOKEN}', url='${TFE_URL}')
+#
+#org = client.set_organization(id='${ORG_ID}')
+#workspace = org.get_workspace('${WORKSPACE_NAME}')
+#print(workspace.name, workspace.id, workspace.created_at)
+#
+#workspace.plan_apply(message='Scheduled Plan and Apply via GitHub Actions for TFE. Any expired roles will be removed as part of this execution.')
+#
+#print('Scheduled TFE run completed for ${WORKSPACE_NAME}.')
+#"
