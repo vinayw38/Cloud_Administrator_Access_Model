@@ -1,0 +1,9 @@
+site_name: Cloud Administrative Access
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Execution Flow: execution.md
+  - Schema Checks: schema.md
+  - Config Examples: examples.md
