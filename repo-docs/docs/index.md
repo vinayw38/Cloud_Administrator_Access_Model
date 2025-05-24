@@ -1,4 +1,7 @@
 ---
+title: Cloud Administrative Access Model
+layout: default
+---
 
 # Cloud Administrative Access Model
 
